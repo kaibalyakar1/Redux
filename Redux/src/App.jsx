@@ -1,17 +1,23 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+
 import "./App.css";
 import Tod from "./Components/Tod";
-
+import CurrencyConverter from "./RTK/CURRENCYCONVERTER/CurrencyConverter";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 function App() {
   const [count, setCount] = useState(0);
 
-  return (
-    <>
-      <Tod />
-    </>
-  );
+  const router = createBrowserRouter([
+    {
+      path: "/todo",
+      element: <Tod />,
+    },
+    {
+      path: "/currency",
+      element: <CurrencyConverter />,
+    },
+  ]);
+  return <RouterProvider router={router}></RouterProvider>;
 }
 
 export default App;

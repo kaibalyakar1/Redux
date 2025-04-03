@@ -1,12 +1,12 @@
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "@redux-devtools/extension";
-
+import { thunk } from "redux-thunk";
 const ADD_TASK = "task/add";
 const DELETE_TASK = "task/delete";
 const initialState = {
   task: [],
 };
-
+//create reducer function
 const taskReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TASK:
@@ -29,8 +29,11 @@ const taskReducer = (state = initialState, action) => {
       return state;
   }
 };
-
-const store = createStore(taskReducer, composeWithDevTools());
+//create a store using reducer
+const store = createStore(
+  taskReducer,
+  composeWithDevTools(applyMiddleware(thunk))
+); //apply middleware and composeWithDevTools for dev tools
 export const addTask = (task) => {
   return {
     type: ADD_TASK,
